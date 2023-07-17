@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css"/>
+</head>
+<body>
+<section class="bg-gray-50 dark:bg-gray-900">
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-5 space-y-3 md:space-y-6 sm:p-7">
+                <form class="space-y-2 md:space-y-4" action="#" th:action="@{/register/processRegistrationForm}" th:object="${webUser}" method="POST">
+                    <h1 class="font-bold text-2xl">REGISTER</h1>
+                    <div>
+                        <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
+                        <input th:field="*{firstName}" type="text" name="firstName" id="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required="">
+                        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+                    </div>
+
+                    <div>
+                        <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+                        <input th:field="*{lastName}" type="text" name="lastName" id="lastName" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required="">
+                        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-red-700"></p>
+                    </div>
+
+                    <div>
+                        <label for="userName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                        <input th:field="*{userName}" type="text" name="userName" id="userName" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required="">
+                        <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="text-red-700"></p>
+                        <p th:if="${registrationError!=null}" th:text="${registrationError}" class="text-red-700"></p>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                        <input th:field="*{email}" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required="">
+                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-red-700"></p>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                        <input th:field="*{password}" type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                        <p class="text-red-700" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                    </div>
+
+
+
+                    <button type="submit" class="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
+                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                        Already have an account? <a th:href="@{/login/showLoginForm}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
+                        <a style="margin-bottom: 20px" th:href="@{/}" class="flex font-semibold text-indigo-600 text-sm mt-10">
+
+                            <svg class="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512">
+                                <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/>
+                            </svg>
+                            Trang chủ
+                        </a>
+                    </p>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

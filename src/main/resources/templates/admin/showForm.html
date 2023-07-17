@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout-page}">
+<head>
+    <title>Form</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:object="${flower}" th:action="@{/admin/products/save}" method="POST" class="w-full max-w-lg">
+        <div  class="flex flex-wrap">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Name
+                </label>
+                <input type="hidden" th:field="*{id}">
+                <input th:field="*{name}"  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" required>
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Price
+                </label>
+                <input th:field="*{price}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" required>
+            </div>
+        </div>
+        <div class="flex flex-wrap">
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Description
+                </label>
+                <input th:field="*{detail}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" required>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap">
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Image Url <span th:text="*{imageUrl}"></span>
+                </label>
+                <input th:field="*{imageUrl}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="file">
+            </div>
+        </div>
+        <div class="flex flex-wrap">
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Category
+                </label>
+                <div class="relative">
+                    <select th:field="*{category.id}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option th:each="categorie : ${categories}" th:value="${categorie.id}" th:text="${categorie.name}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="flex flex-wrap">
+            <div class="w-full px-3">
+                <button class=" text-white bg-blue-600 hover:bg-blue-800 ml-1 border-0 py-2 px-6 focus:outline-none rounded" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

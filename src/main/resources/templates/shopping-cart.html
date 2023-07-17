@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css"/>
+  <style>
+        #summary {
+            background-color: #f6f6f6;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+<div class="container mx-auto mt-10">
+    <div class="flex shadow-md my-10">
+        <div class="w-3/4 bg-white px-10 py-10">
+            <div class="flex justify-between border-b pb-8">
+                <h1 class="font-semibold text-2xl">Giỏ hàng</h1>
+            </div>
+            <div class="flex mt-10 mb-5">
+                <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Chi tiết sản phẩm</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Số lượng</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Đơn giá</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Tổng</h3>
+            </div>
+            <div th:each="cartItem : ${cart.getCartItemList()}" class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+                <div class="flex w-2/5">
+                    <div class="w-20">
+                        <img class="h-24" th:src="@{${'/images/'+ cartItem.flower.imageUrl}}" alt="">
+                    </div>
+                    <div class="flex flex-col justify-between ml-4 flex-grow">
+                        <span th:text="${cartItem.flower.name}" class="font-bold text-sm"></span>
+                        <a style="margin-bottom: 32px" th:href="@{/remove-from-cart(id=${cartItem.flower.id})}" class="font-semibold hover:text-red-500 text-gray-500">Loại bỏ</a>
+                    </div>
+                </div>
+                <div class="flex justify-center w-1/5">
+                    <form th:action="@{/update-cart}" method="POST" class='quantity'>
+                        <input type="hidden" name="id" th:value="${cartItem.flower.id}">
+                        <input style="font-size: larger" type='button' value='-' class='minus fill-current text-gray-600 font-bold	'/>
+                        <input type='text' name="quantity" th:value="${cartItem.quantity}" class='qty mx-2 p-1 border text-center w-8' />
+                        <input style="font-size: larger" type='button' value='+' class="plus fill-current text-gray-600 font-bold	" />
+                        / <button class="hover:text-red-500 font-semibold text-gray-500" type="submit">Cập nhật</button>
+                    </form>
+
+                </div>
+
+                <span th:text="${#numbers.formatDecimal(cartItem.flower.price, 0, 'POINT', 0, 'COMMA')}" class="text-center w-1/5 font-semibold text-sm"></span>
+                <span th:text="${#numbers.formatDecimal(cartItem.flower.price * cartItem.quantity, 0, 'POINT', 0, 'COMMA')}" class="text-center w-1/5 font-semibold text-sm"></span>
+            </div>
+
+            <a th:href="@{/}" class="flex font-semibold text-indigo-600 text-sm mt-10">
+
+                <svg class="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512">
+                    <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/>
+                </svg>
+                Continue Shopping
+            </a>
+        </div>
+
+        <div id="summary" class="w-1/4 px-8 py-10">
+            <h1 class="font-semibold text-2xl border-b pb-8">Tóm tắt đơn hàng</h1>
+            <div class="flex justify-between mt-10 mb-5">
+                <span th:text="${totalQuantity + ' SẢN PHẨM'}" class="font-semibold text-sm uppercase"></span>
+            </div>
+            <div>
+                <label class="font-medium inline-block mb-3 text-sm uppercase">Vận chuyển</label>
+                <select class="block p-2 text-gray-600 w-full text-sm">
+                    <option>Vận chuyển tiêu chuẩn - 30,000 đ</option>
+                </select>
+            </div>
+            <div class="border-t mt-8">
+                <div class="flex font-semibold justify-between py-6 text-sm uppercase">
+                    <span>Thành tiền</span>
+                    <span th:text="${#numbers.formatDecimal(totalPrice, 0, 'POINT', 0, 'COMMA')}"></span>
+                </div>
+                <a style="box-sizing: border-box; padding: 13px" th:href="@{/checkout}" class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                    Thanh toán
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Plus button click event
+        $('.plus').click(function() {
+            var input = $(this).prev('input[name="quantity"]');
+            var quantity = parseInt(input.val());
+
+            if (isNaN(quantity)) {
+                quantity = 0;
+            }
+
+            quantity += 1;
+            input.val(quantity);
+        });
+
+        // Minus button click event
+        $('.minus').click(function() {
+            var input = $(this).next('input[name="quantity"]');
+            var quantity = parseInt(input.val());
+
+            if (isNaN(quantity)) {
+                quantity = 0;
+            }
+
+            if (quantity > 0) {
+                quantity -= 1;
+            }
+
+            input.val(quantity);
+        });
+    });
+
+
+</script>
+
+</body>
+</html>

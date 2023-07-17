@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout-page}">
+<head>
+  <title>Đơn hàng</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Mã đơn hàng
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Tên khách hàng
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Địa chỉ
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Hoạt động
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="order : ${orders}" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+
+        <td th:text="${order.id}" class="px-6 py-4">
+
+        </td>
+        <td th:text="${order.fullName}" class="px-6 py-4">
+
+        </td>
+        <td th:text="${order.address}" class="px-6 py-4">
+
+        </td>
+        <td class="px-6 py-4">
+          <a th:href="@{/admin/tracking/detail(id=${order.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Xem</a>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>
