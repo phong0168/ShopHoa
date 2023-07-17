@@ -7,55 +7,59 @@
 </head>
 <body>
 <div layout:fragment="content" class="container-fluid">
-  <p class="text-2xl font-semibold ml-2">Đơn hàng</p>
-  <br>
-  <div class="relative overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">Mã đơn hàng</th>
-                    <th scope="col" class="px-6 py-3">Ngày đặt hàng</th>
-                    <th scope="col" class="px-6 py-3">Tên khách hàng</th>
-                    <th scope="col" class="px-6 py-3">Địa chỉ</th>
-                    <th scope="col" class="px-6 py-3">Số điện thoại</th>
-                    <th scope="col" class="px-6 py-3">Tổng tiền</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-4 whitespace-nowrap" th:text="${order.id}"></td>
-                    <td class="px-6 py-4" th:text="${order.orderDate}"></td>
-                    <td class="px-6 py-4" th:text="${order.fullName}"></td>
-                    <td class="px-6 py-4" th:text="${order.address}"></td>
-                    <td class="px-6 py-4" th:text="${order.phoneNumber}"></td>
-                    <td class="px-6 py-4" th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'POINT', 0, 'COMMA') + ' đ'}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-  <br>
-  <p class="text-2xl font-semibold ml-2">Chi tiết đơn hàng</p>
-  <br>
-  <div class="relative overflow-x-auto">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-      <tr>
-        <th scope="col" class="px-6 py-3">Tên sản phẩm</th>
-        <th scope="col" class="px-6 py-3">Đơn giá</th>
-        <th scope="col" class="px-6 py-3">Số lượng</th>
-        <th scope="col" class="px-6 py-3">Thành tiền</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" th:each="orderDetail : ${order.getFlowerQuantities()}">
-        <td class="px-6 py-4 whitespace-nowrap" th:text="${orderDetail.getKey().name}"></td>
-        <td class="px-6 py-4" th:text="${#numbers.formatDecimal(orderDetail.getKey().price, 0, 'POINT', 0, 'COMMA') + ' đ'}"></td>
-        <td class="px-6 py-4" th:text="${orderDetail.getValue()}"></td>
-        <td class="px-6 py-4" th:text="${#numbers.formatDecimal(orderDetail.getKey().price * orderDetail.getValue(), 0, 'POINT', 0, 'COMMA') + ' đ'}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    <p class="text-2xl font-semibold ml-2">Đơn hàng</p>
+    <br>
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">Mã đơn hàng</th>
+                <th scope="col" class="px-6 py-3">Ngày đặt hàng</th>
+                <th scope="col" class="px-6 py-3">Tên khách hàng</th>
+                <th scope="col" class="px-6 py-3">Địa chỉ</th>
+                <th scope="col" class="px-6 py-3">Số điện thoại</th>
+                <th scope="col" class="px-6 py-3">Tổng tiền</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4 whitespace-nowrap" th:text="${order.id}"></td>
+                <td class="px-6 py-4" th:text="${order.orderDate}"></td>
+                <td class="px-6 py-4" th:text="${order.fullName}"></td>
+                <td class="px-6 py-4" th:text="${order.address}"></td>
+                <td class="px-6 py-4" th:text="${order.phoneNumber}"></td>
+                <td class="px-6 py-4"
+                    th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'POINT', 0, 'COMMA') + ' đ'}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <p class="text-2xl font-semibold ml-2">Chi tiết đơn hàng</p>
+    <br>
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">Tên sản phẩm</th>
+                <th scope="col" class="px-6 py-3">Đơn giá</th>
+                <th scope="col" class="px-6 py-3">Số lượng</th>
+                <th scope="col" class="px-6 py-3">Thành tiền</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                th:each="orderDetail : ${order.getFlowerQuantities()}">
+                <td class="px-6 py-4 whitespace-nowrap" th:text="${orderDetail.getKey().name}"></td>
+                <td class="px-6 py-4"
+                    th:text="${#numbers.formatDecimal(orderDetail.getKey().price, 0, 'POINT', 0, 'COMMA') + ' đ'}"></td>
+                <td class="px-6 py-4" th:text="${orderDetail.getValue()}"></td>
+                <td class="px-6 py-4"
+                    th:text="${#numbers.formatDecimal(orderDetail.getKey().price * orderDetail.getValue(), 0, 'POINT', 0, 'COMMA') + ' đ'}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 
