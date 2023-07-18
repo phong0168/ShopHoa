@@ -75,6 +75,7 @@ public class AdminController {
 
     @GetMapping("/tracking/detail")
     public String trackingDetail(Model model, int id){
+//        model.addAttribute("order", orderService.findById(id));
         model.addAttribute("order", orderService.findOrderAndProductsByOrderId(id));
         return "/admin/tracking-detail";
     }

@@ -16,19 +16,19 @@
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
         <th scope="col" class="px-6 py-3">
-          Product name
+          Tên sản phẩm
         </th>
         <th scope="col" class="px-6 py-3">
-          Image
+          Hình ảnh
         </th>
         <th scope="col" class="px-6 py-3">
-          Category
+          Loại
         </th>
         <th scope="col" class="px-6 py-3">
-          Price
+          Giá
         </th>
         <th scope="col" class="px-6 py-3">
-          Action
+          Hoạt động
         </th>
       </tr>
       </thead>
@@ -46,9 +46,9 @@
 
         </td>
         <td class="px-6 py-4">
-          <a th:href="@{/admin/products/showFormForUpdate(id=${flower.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+          <a th:href="@{/admin/products/showFormForUpdate(id=${flower.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Sửa</a>
           | <a th:href="@{/admin/products/delete(id=${flower.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-               onclick="if(!(confirm('Xác nhận xóa?'))) return false">Delete</a>
+               onclick="if(!(confirm('Xác nhận xóa?'))) return false">Xóa</a>
         </td>
 
       </tr>

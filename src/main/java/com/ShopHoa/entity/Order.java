@@ -20,7 +20,7 @@ public class Order {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "total_price")
+    @Column(name = "total_price", insertable = false, columnDefinition = "FLOAT DEFAULT 0")
     private float totalPrice;
 
     @Column(name = "f_and_l_name")

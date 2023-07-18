@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -27,13 +29,17 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public String findAll(Model model, String search, @RequestParam(value = "page", defaultValue = "1") int page){
-        List<Flower> flowers;
-        if (search != null){
-            flowers = flowerService.findByName(search);
-        }
-        else{
-            flowers = flowerService.findAll();
+    public String findAll(Model model, @RequestParam(value = "sort", defaultValue = "") String sort, @RequestParam(value = "search", defaultValue = "") String search, @RequestParam(value = "page", defaultValue = "1") int page){
+
+        List<Flower> flowers = flowerService.findByName(search);
+        switch (sort)
+        {
+            case "price-asc":
+                flowers = flowers.stream().sorted(Comparator.comparing(Flower::getPrice)).collect(Collectors.toList());
+                break;
+            case "price-desc":
+                flowers = flowers.stream().sorted(Comparator.comparing(Flower::getPrice).reversed()).collect(Collectors.toList());
+                break;
         }
         int noOfRecordPerPage = 4;
         int noOfPage = (int) Math.ceil((double) flowers.size() / noOfRecordPerPage);
@@ -42,6 +48,7 @@ public class ProductController {
         model.addAttribute("noOfPage", noOfPage);
         model.addAttribute("search", search);
         model.addAttribute("flowers", flowers);
+        model.addAttribute("sort", sort);
         return "products";
     }
     @GetMapping("/products/detail")
