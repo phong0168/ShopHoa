@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public String findAll(Model model, @RequestParam(value = "sort", defaultValue = "") String sort, @RequestParam(value = "search", defaultValue = "") String search, @RequestParam(value = "page", defaultValue = "1") int page){
+    public String findByName(Model model, @RequestParam(value = "sort", defaultValue = "") String sort, @RequestParam(value = "search", defaultValue = "") String search, @RequestParam(value = "page", defaultValue = "1") int page){
 
         List<Flower> flowers = flowerService.findByName(search);
         switch (sort)

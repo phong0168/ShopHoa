@@ -76,14 +76,15 @@ html,body{
     overflow: hidden;
 }
 .wrapper img{
-    width: 80%;
-    height: 80%;
+    width: 85%;
+    height: 85%;
     transition: scale 400ms;
 }
 .wrapper:hover img{
-    scale: 117%;
+    scale: 110%;
 }
 *{
     box-sizing: border-box;
 }
+
 
