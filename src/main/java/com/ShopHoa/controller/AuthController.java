@@ -21,9 +21,9 @@ import java.util.logging.Logger;
 @Controller
 public class AuthController {
 
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public AuthController(UserService userService) {
@@ -62,7 +62,7 @@ public class AuthController {
     public String processRegistrationForm(
             @Valid @ModelAttribute("webUser") WebUser theWebUser,
             BindingResult theBindingResult,
-            HttpSession session, Model theModel) {
+            Model theModel) {
 
         String userName = theWebUser.getUserName();
         logger.info("Processing registration form for: " + userName);
@@ -85,9 +85,6 @@ public class AuthController {
         userService.save(theWebUser);
 
         logger.info("Successfully created user: " + userName);
-
-        // place user in the web http session for later use
-        session.setAttribute("user", theWebUser);
 
         return "registration-confirmation";
     }

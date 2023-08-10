@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class FlowerServiceImpl implements FlowerService {
-    private FlowerDao flowerDao;
+    private final FlowerDao flowerDao;
 
     @Autowired
     public FlowerServiceImpl(FlowerDao flowerDao) {

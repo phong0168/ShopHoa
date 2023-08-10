@@ -41,7 +41,7 @@ public class AdminController {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("flower", flower);
         model.addAttribute("categories", categories);
-        return "/admin/showForm";
+        return "/admin/show-form-product";
     }
 
     @GetMapping("/products/showFormForUpdate")
@@ -50,7 +50,7 @@ public class AdminController {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
         model.addAttribute("flower", flower);
-        return "/admin/showForm";
+        return "/admin/show-form-product";
     }
 
     @PostMapping("/products/save")
@@ -74,8 +74,8 @@ public class AdminController {
 
     @GetMapping("/tracking/detail")
     public String trackingDetail(Model model, int id){
-//        model.addAttribute("order", orderService.findById(id));
-        model.addAttribute("order", orderService.findOrderAndProductsByOrderId(id));
+        model.addAttribute("order", orderService.findById(id));
+//        model.addAttribute("order", orderService.findOrderAndProductsByOrderId(id));
         return "/admin/tracking-detail";
     }
 }

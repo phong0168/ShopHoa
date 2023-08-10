@@ -20,11 +20,11 @@ import java.util.Collections;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 
-	private RoleRepository roleRepository;
+	private final RoleRepository roleRepository;
 
-	private BCryptPasswordEncoder passwordEncoder;
+	private final BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
@@ -50,10 +50,8 @@ public class UserServiceImpl implements UserService {
 		user.setFirstName(webUser.getFirstName());
 		user.setLastName(webUser.getLastName());
 		user.setEmail(webUser.getEmail());
-
-		// give user default role of "employee"
+		// give user default role of "user"
 		user.setRoles(Collections.singletonList(roleRepository.findByName("ROLE_USER")));
-
 		// save user in the database
 		userRepository.save(user);
 	}
@@ -81,5 +79,6 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return authorities;
+
 	}
 }

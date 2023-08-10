@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Collection;
-import java.util.List;
 
 @Getter
 @Setter
@@ -37,4 +36,5 @@ public class User {
             joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
             inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
     private Collection<Role> roles;
+
 }

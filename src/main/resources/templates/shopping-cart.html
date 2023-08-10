@@ -37,12 +37,11 @@
                     </div>
                 </div>
                 <div class="flex justify-center w-1/5">
-                    <form th:action="@{/update-cart}" method="POST" class='quantity'>
+                    <form th:action="@{/update-cart}" method="POST" class='quantity-container'>
                         <input type="hidden" name="id" th:value="${cartItem.flower.id}">
-                        <input style="font-size: larger" type='button' value='-' class='minus fill-current text-gray-600 font-bold	'/>
-                        <input type='text' name="quantity" th:value="${cartItem.quantity}" class='qty mx-2 p-1 border text-center w-8' />
-                        <input style="font-size: larger" type='button' value='+' class="plus fill-current text-gray-600 font-bold	" />
-                        <button class="hover:text-red-500 font-semibold text-gray-500" type="submit">Cập nhật</button>
+                        <input style="font-size: larger" type='submit' value='-' class='minus fill-current text-gray-600 font-bold	'/>
+                        <input type='text' id="quantity" name="quantity" th:value="${cartItem.quantity}" class='qty mx-2 p-1 border text-center w-8' />
+                        <input style="font-size: larger" type='submit' value='+' class="plus fill-current text-gray-600 font-bold	" />
                     </form>
 
                 </div>
@@ -89,11 +88,11 @@
     $(document).ready(function() {
         // Plus button click event
         $('.plus').click(function() {
-            var input = $(this).prev('input[name="quantity"]');
-            var quantity = parseInt(input.val());
+            let input = $(this).prev();
+            let quantity = parseInt(input.val());
 
             if (isNaN(quantity)) {
-                quantity = 0;
+                quantity = 1;
             }
 
             quantity += 1;
@@ -102,14 +101,14 @@
 
         // Minus button click event
         $('.minus').click(function() {
-            var input = $(this).next('input[name="quantity"]');
-            var quantity = parseInt(input.val());
+            let input = $(this).next();
+            let quantity = parseInt(input.val());
 
             if (isNaN(quantity)) {
-                quantity = 0;
+                quantity = 1;
             }
 
-            if (quantity > 0) {
+            if (quantity > 1) {
                 quantity -= 1;
             }
 

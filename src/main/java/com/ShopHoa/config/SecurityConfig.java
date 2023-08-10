@@ -1,4 +1,4 @@
-package com.ShopHoa.securiry;
+package com.ShopHoa.config;
 
 import com.ShopHoa.service.UserService;
 import org.springframework.context.annotation.Bean;

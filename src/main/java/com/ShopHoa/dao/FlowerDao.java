@@ -1,6 +1,5 @@
 package com.ShopHoa.dao;
 
-import com.ShopHoa.entity.Category;
 import com.ShopHoa.entity.Flower;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;

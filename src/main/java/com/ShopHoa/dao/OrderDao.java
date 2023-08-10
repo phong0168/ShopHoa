@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class OrderDao {
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public OrderDao(EntityManager entityManager) {

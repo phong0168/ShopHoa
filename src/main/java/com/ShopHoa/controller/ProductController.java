@@ -20,12 +20,10 @@ import java.util.stream.Collectors;
 @Controller
 public class ProductController {
     private final FlowerServiceImpl flowerService;
-    private final CategoryServiceImpl categoryService;
 
     @Autowired
-    public ProductController(FlowerServiceImpl flowerService, CategoryServiceImpl categoryService) {
+    public ProductController(FlowerServiceImpl flowerService) {
         this.flowerService = flowerService;
-        this.categoryService = categoryService;
     }
 
     @GetMapping("/products")

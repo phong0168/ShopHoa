@@ -50,7 +50,6 @@ public class CartController {
 
         Cart cart = (Cart) session.getAttribute("cart");
         cart.removeCartItem(id);
-        model.addAttribute("cart", cart);
         return "redirect:show-shopping-cart";
     }
 
@@ -58,7 +57,6 @@ public class CartController {
     public String updateCart(@RequestParam("id") int id, @RequestParam("quantity") int quantity, Model model, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         cart.updateCartItem(id, quantity);
-        model.addAttribute("cart", cart);
         return "redirect:show-shopping-cart";
     }
 

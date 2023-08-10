@@ -86,7 +86,7 @@
                 </li>
                 <li th:each="i : ${#numbers.sequence(1, noOfPage)}">
                     <a th:text="${i}" th:href="@{/products(sort=${sort},search=${search},page=${i})}"
-                       class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"></a>
+                       class="numberPage flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"></a>
                 </li>
 
                 <li>
@@ -103,7 +103,14 @@
         </nav>
     </div>
 
-
+    <script>
+        $(document).ready(function (){
+            $(".numberPage").click(function (){
+                $(this).css("color", "blue");
+            })
+        })
+    </script>
 </div>
+
 </body>
 </html>
