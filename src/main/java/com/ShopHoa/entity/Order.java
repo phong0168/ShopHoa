@@ -1,10 +1,7 @@
 package com.ShopHoa.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.*;
 
@@ -20,7 +17,7 @@ public class Order {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "total_price", insertable = false, columnDefinition = "FLOAT DEFAULT 0")
+    @Column(name = "total_price", insertable = false)
     private float totalPrice;
 
     @Column(name = "f_and_l_name")
@@ -35,8 +32,7 @@ public class Order {
     @Column(name = "note")
     private String note;
 
-    @Column(name = "order_date", insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(TemporalType.TIMESTAMP )
+    @Column(name = "order_date", insertable = false)
     private Date orderDate;
 
     @ElementCollection
@@ -44,6 +40,11 @@ public class Order {
     @MapKeyJoinColumn(name = "flower_id")
     @Column(name = "quantity")
     private Map<Flower, Integer> flowerQuantities;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 

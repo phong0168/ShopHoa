@@ -33,6 +33,7 @@ public class SecurityConfig {
                         configurer
                                 .requestMatchers("/register/showRegistrationForm").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/cart/**").hasRole("USER")
                                 .requestMatchers("/**").permitAll()
                                 .requestMatchers("/**/**").permitAll()
                                 .anyRequest().authenticated()

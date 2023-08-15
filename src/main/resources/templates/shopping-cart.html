@@ -33,11 +33,11 @@
                     </div>
                     <div class="flex flex-col justify-between ml-4 flex-grow">
                         <span th:text="${cartItem.flower.name}" class="font-bold text-sm"></span>
-                        <a style="margin-bottom: 34px" th:href="@{/remove-from-cart(id=${cartItem.flower.id})}" class="font-semibold hover:text-red-500 text-gray-500">Loại bỏ</a>
+                        <a style="margin-bottom: 34px" th:href="@{/cart/remove-from-cart(id=${cartItem.flower.id})}" class="font-semibold hover:text-red-500 text-gray-500">Loại bỏ</a>
                     </div>
                 </div>
                 <div class="flex justify-center w-1/5">
-                    <form th:action="@{/update-cart}" method="POST" class='quantity-container'>
+                    <form th:action="@{/cart/update-cart}" method="POST" class='quantity-container'>
                         <input type="hidden" name="id" th:value="${cartItem.flower.id}">
                         <input style="font-size: larger" type='submit' value='-' class='minus fill-current text-gray-600 font-bold	'/>
                         <input type='text' id="quantity" name="quantity" th:value="${cartItem.quantity}" class='qty mx-2 p-1 border text-center w-8' />
