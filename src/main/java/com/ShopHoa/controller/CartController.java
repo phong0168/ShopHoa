@@ -56,7 +56,7 @@ public class CartController {
     }
 
     @PostMapping("/update-cart")
-    public String updateCart(@RequestParam("id") int id, @RequestParam("quantity") int quantity, Model model, HttpSession session) {
+    public String updateCart(@RequestParam("id") int id, @RequestParam("quantity") int quantity, HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
         cart.updateCartItem(id, quantity);
         return "redirect:show-shopping-cart";

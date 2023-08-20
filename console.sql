@@ -30,7 +30,9 @@ create table if not exists orders
     phone_number varchar(255)                        not null,
     address      text                                not null,
     note         text                                null,
-    order_date   timestamp default CURRENT_TIMESTAMP not null
+    order_date   timestamp default CURRENT_TIMESTAMP not null,
+    user_id      int                                 not null,
+    foreign key (user_id) references user (id)
     );
 
 create table if not exists order_detail

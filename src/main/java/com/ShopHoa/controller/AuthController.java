@@ -55,7 +55,7 @@ public class AuthController {
     @GetMapping("/access-denied")
     public String showAccessDenied() {
 
-        return "access-denied.html";
+        return "access-denied";
     }
 
     @PostMapping("/register/processRegistrationForm")

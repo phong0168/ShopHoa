@@ -4,20 +4,24 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class WebUser {
-    @Pattern(regexp="^[a-zA-Z0-9_-]{3,16}$", message="tên người dùng phải bao gồm 3 đến 16 ký tự chữ cái, số, dấu gạch dưới hoặc gạch ngang, không được chứa khoảng trắng.")
+    @NotNull(message = "không được để trống")
+    @Pattern(regexp="^[a-zA-Z0-9_-]{3,16}$", message="bao gồm 3 đến 16 ký tự chữ cái, số, dấu gạch dưới hoặc gạch ngang, không được chứa khoảng trắng.")
     private String userName;
 
-    @Size(min = 6, message = "mật khẩu phải có ít nhất 6 ký tự")
+    @NotNull(message = "không được để trống")
+    @Size(min = 6, message = "ít nhất 6 ký tự")
     private String password;
 
-    @Size(min = 1, message = "is required")
+    @NotNull(message = "không được để trống")
+    @Size(min = 6, message = "ít nhất 6 ký tự")
     private String firstName;
 
-    @Size(min = 1, message = "is required")
+    @NotNull(message = "không được để trống")
+    @Size(min = 6, message = "ít nhất 6 ký tự")
     private String lastName;
 
-    @Size(min = 1, message = "is required")
-    @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+    @NotNull(message = "không được để trống")
+    @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "địa chỉ email không hợp lệ")
     private String email;
 
     public WebUser() {
