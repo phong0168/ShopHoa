@@ -49,7 +49,6 @@ public class Order {
 
 
 
-    // constructors, getters and setters
 
 
 }

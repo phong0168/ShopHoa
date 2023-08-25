@@ -86,5 +86,8 @@ html,body{
 *{
     box-sizing: border-box;
 }
+.redFill{
+    fill: red;
+}
 
 

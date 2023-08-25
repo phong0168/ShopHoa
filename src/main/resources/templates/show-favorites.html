@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout-page}">
+<head>
+    <title>Sản phẩm yêu thích</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <p class="pl-6 text-2xl font-bold text-red-700">SẢN PHẨM ĐÃ THÍCH</p>
+    <br>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Tên sản phẩm
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Hình ảnh
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Giá
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Hoạt động
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="favorite : ${favoriteList}" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <td class="px-6 py-4 h-60">
+                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" th:text="${favorite.flower.name}" th:href="@{/products/detail(id=${favorite.flower.id})}">
+                    </a>
+                </td>
+
+
+                <td class="px-6 py-4 h-60">
+                    <img th:src="@{${'/images/'+ favorite.flower.imageUrl}}" alt="">
+                </td>
+
+                <td th:text="${#numbers.formatDecimal(favorite.flower.price, 0, 'POINT', 0, 'COMMA')}" class="px-6 py-4">
+
+                </td>
+                <td class="px-6 py-4">
+                     <a th:href="@{/favorite/delete(id=${favorite.id})}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                         onclick="if(!(confirm('Xác nhận xóa?'))) return false">Xóa</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+</body>
+</html>

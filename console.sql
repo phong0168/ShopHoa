@@ -98,6 +98,18 @@ create table if not exists users_roles
 create index FK_ROLE_idx
     on users_roles (role_id);
 
+create table if not exists favorite
+(
+    id         int auto_increment
+    primary key,
+    user_id    int not null,
+    flower_id  int not null,
+    constraint favorite_flower_id_fk
+    foreign key (flower_id) references flower (id),
+    constraint favorite_user_id_fk
+    foreign key (user_id) references user (id)
+    );
+
 INSERT INTO shophoa.category (id, name) VALUES (1, 'Hoa sinh nhật');
 INSERT INTO shophoa.category (id, name) VALUES (2, 'Hoa khai trương');
 INSERT INTO shophoa.category (id, name) VALUES (3, 'Hoa chúc mừng');
@@ -184,7 +196,7 @@ INSERT INTO shophoa.flower (id, name, detail, image_url, price, category_id) VAL
 Cúc calimero trắng : 10
 Hoa baby : 1
 Hồng trắng cồ: 15', '17.jpg', 800000, 5);
-INSERT INTO shophoa.flower (id, name, detail, image_url, price, category_id) VALUES (21, 'It is you', 'Một ngày dạo trên phố, chợt thấy từng khóm hoa trong nắng đung đưa như mời gọi. Lấy ý tưởng từ những bông hoa nắng đó, bó hoa được thiết kế với tông màu cam đào sáng, tươi vui và nhẹ nhàng. Thích hợp tặng sinh nhật, chúc mừng, kỉ niệm, v.v…
+INSERT INTO shophoa.flower (id, name, detail, image_url, price, category_id) VALUES (21, 'It\'s you', 'Một ngày dạo trên phố, chợt thấy từng khóm hoa trong nắng đung đưa như mời gọi. Lấy ý tưởng từ những bông hoa nắng đó, bó hoa được thiết kế với tông màu cam đào sáng, tươi vui và nhẹ nhàng. Thích hợp tặng sinh nhật, chúc mừng, kỉ niệm, v.v…
                                                                                         Sản phẩm bao gồm:
                                                                                      Cúc calimero trắng: 10
                                                                                      Hồng trắng nhí: 12
@@ -207,3 +219,6 @@ INSERT INTO shophoa.user (id, username, password, first_name, last_name, email) 
 
 INSERT INTO shophoa.users_roles (user_id, role_id) VALUES (1, 1);
 INSERT INTO shophoa.users_roles (user_id, role_id) VALUES (2, 2);
+
+
+

@@ -44,7 +44,7 @@
                 </ul>
                 <!-- Header Icons -->
                 <div class="hidden xl:flex items-center space-x-5 items-center">
-                    <a class="hover:text-amber-800" href="#">
+                    <a class="hover:text-amber-800" th:href="@{/favorite/show-favorites}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -239,7 +239,16 @@
     $("#sortDrop").change(function () {
         const value = $("#sortDrop").val();
         window.location.href = "/products?sort=" + value;
-    })
+    });
+
+    $("#button-heart").click(function(){
+        $("#svg-heart").toggleClass("redFill");
+        setTimeout(function() {
+            alert("Đã thêm vào danh sách yêu thích");
+        }, 100);
+    });
+
+
 </script>
 </body>
 </html>

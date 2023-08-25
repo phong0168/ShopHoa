@@ -42,7 +42,7 @@
         <td th:text="${flower.category.getName()}" class="px-6 py-4">
 
         </td>
-        <td th:text="${#numbers.formatDecimal(flower.price, 0, 'COMMA', 0, 'POINT')}" class="px-6 py-4">
+        <td th:text="${#numbers.formatDecimal(flower.price, 0, 'POINT', 0, 'COMMA')}" class="px-6 py-4">
 
         </td>
         <td class="px-6 py-4">

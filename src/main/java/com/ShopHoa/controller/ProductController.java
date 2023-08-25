@@ -1,9 +1,15 @@
 package com.ShopHoa.controller;
 
+import com.ShopHoa.dao.FavoriteRepository;
 import com.ShopHoa.entity.Category;
+import com.ShopHoa.entity.Favorite;
 import com.ShopHoa.entity.Flower;
+import com.ShopHoa.entity.User;
 import com.ShopHoa.service.CategoryServiceImpl;
+import com.ShopHoa.service.FavoriteService;
 import com.ShopHoa.service.FlowerServiceImpl;
+import com.ShopHoa.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,10 +27,14 @@ import java.util.stream.Collectors;
 @Controller
 public class ProductController {
     private final FlowerServiceImpl flowerService;
+    private final FavoriteService favoriteService;
+    private final UserService userService;
 
     @Autowired
-    public ProductController(FlowerServiceImpl flowerService) {
+    public ProductController(FlowerServiceImpl flowerService, FavoriteService favoriteService, UserService userService) {
         this.flowerService = flowerService;
+        this.favoriteService = favoriteService;
+        this.userService = userService;
     }
 
     @GetMapping("/products")
@@ -60,6 +71,30 @@ public class ProductController {
         List<Flower> flowers = flowerService.findByCategory(id);
         model.addAttribute("flowers", flowers);
         return "products";
+    }
+
+    @GetMapping("/favorite/add")
+    public String addToFavorite(int id, Principal principal){
+        final String currentUser = principal.getName();
+        Flower flower = flowerService.findById(id);
+        Favorite favorite = new Favorite();
+        favorite.setFlower(flower);
+        favorite.setUser(userService.findByUserName(currentUser));
+        favoriteService.save(favorite);
+        return "redirect:/products/detail?id=" + id;
+    }
+
+    @GetMapping("/favorite/delete")
+    public String deleteFavorite(int id){
+        favoriteService.deleteById(id);
+        return "redirect:/favorite/show-favorites";
+    }
+
+    @GetMapping("/favorite/show-favorites")
+    public String showFavorite(Model model, Principal principal){
+        List<Favorite> favoriteList = favoriteService.findAllByUserId(userService.findByUserName(principal.getName()).getId());
+        model.addAttribute("favoriteList", favoriteList);
+        return "show-favorites";
     }
 
 
