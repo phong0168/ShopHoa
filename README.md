@@ -1,3 +1,3 @@
 # ShopHoa
 Diagram
-![image](https://github.com/phong0168/ShopHoa/assets/104688354/21e1a84c-7768-4313-905e-5331f295a80b)
+![image](https://github.com/phong0168/ShopHoa/assets/104688354/a0d2b74c-f40d-4522-b5ba-f83376d032d6)
