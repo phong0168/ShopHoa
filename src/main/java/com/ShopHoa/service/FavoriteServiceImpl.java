@@ -33,19 +33,6 @@ public class FavoriteServiceImpl implements FavoriteService{
         return favoriteRepository.findAllByUserId(id);
     }
 
-    @Override
-    public boolean checkFavorite(int userId, int flowerId) {
-        // Truy vấn cơ sở dữ liệu bằng SQL
-        Favorite favorite = favoriteRepository.findByUserIdAndFlowerId(userId, flowerId);
-        // Nếu có kết quả, nghĩa là đã yêu thích
-        if (favorite != null) {
-            return true;
-        }
-        // Ngược lại, nghĩa là chưa yêu thích
-        else {
-            return false;
-        }
-    }
 
 
 }

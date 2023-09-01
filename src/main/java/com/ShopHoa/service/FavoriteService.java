@@ -9,5 +9,4 @@ public interface FavoriteService {
     void deleteById(int id);
     List<Favorite> findAllByUserId(int id);
 
-    boolean checkFavorite(int userId, int flowerId);
 }

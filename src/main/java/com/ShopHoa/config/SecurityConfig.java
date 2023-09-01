@@ -36,6 +36,7 @@ public class SecurityConfig {
                                 .requestMatchers("/cart/**").hasRole("USER")
                                 .requestMatchers("/favorite/**").hasRole("USER")
                                 .requestMatchers("/**").permitAll()
+
                                 .requestMatchers("/**/**").permitAll()
                                 .anyRequest().authenticated()
 
