@@ -36,11 +36,6 @@ public class FlowerServiceImpl implements FlowerService {
         return flowerDao.findByCategory(id);
     }
 
-    @Override
-    public Flower findFlowerAndCategoryByFlowerId(int id){
-        return flowerDao.findFlowerAndCategoryByFlowerId(id);
-    }
-
     @Transactional
     @Override
     public void save(Flower flower) {

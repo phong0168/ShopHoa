@@ -9,9 +9,6 @@ public interface FlowerService {
     List<Flower> findByName(String name);
     Flower findById(int id);
     List<Flower> findByCategory(int id);
-
-    Flower findFlowerAndCategoryByFlowerId(int id);
-
     void save(Flower flower);
     void deleteById(int id);
 }
