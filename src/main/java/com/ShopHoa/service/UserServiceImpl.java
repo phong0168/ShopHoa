@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByUserName(userName);
 
 		if (user == null) {
-			throw new UsernameNotFoundException("Invalid username or password.");
+			throw new UsernameNotFoundException("Invalid username.");
 		}
 
 		Collection<SimpleGrantedAuthority> authorities = mapRolesToAuthorities(user.getRoles());

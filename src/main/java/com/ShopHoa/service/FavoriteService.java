@@ -7,6 +7,6 @@ import java.util.List;
 public interface FavoriteService {
     void save(Favorite favorite);
     void deleteById(int id);
-    List<Favorite> findAllByUserId(int id);
+    List<Favorite> findByUserId(int id);
 
 }

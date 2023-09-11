@@ -1,45 +1,23 @@
 package com.ShopHoa.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "category")
 public class Category {
 
-    public List<Flower> getFlowers() {
-        return flowers;
-    }
-
-    public Category(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-    public Category() {
-
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setFlowers(List<Flower> flowers) {
-        this.flowers = flowers;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +29,13 @@ public class Category {
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
             CascadeType.REFRESH })
     private List<Flower> flowers;
+
+    public void add(Flower flower) {
+        if (flowers == null) {
+            flowers = new ArrayList<>();
+        }
+        flowers.add(flower);
+    }
 
 
 

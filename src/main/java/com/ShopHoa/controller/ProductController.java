@@ -76,9 +76,8 @@ public class ProductController {
     @GetMapping("/favorite/add")
     public String addToFavorite(int id, Principal principal){
         final String currentUser = principal.getName();
-        Flower flower = flowerService.findById(id);
         Favorite favorite = new Favorite();
-        favorite.setFlower(flower);
+        favorite.setFlower(flowerService.findById(id));
         favorite.setUser(userService.findByUserName(currentUser));
         favoriteService.save(favorite);
         return "redirect:/products/detail?id=" + id;
@@ -92,12 +91,9 @@ public class ProductController {
 
     @GetMapping("/favorite/show-favorites")
     public String showFavorite(Model model, Principal principal){
-        List<Favorite> favoriteList = favoriteService.findAllByUserId(userService.findByUserName(principal.getName()).getId());
+        List<Favorite> favoriteList = favoriteService.findByUserId(userService.findByUserName(principal.getName()).getId());
         model.addAttribute("favoriteList", favoriteList);
         return "show-favorites";
     }
-
-
-
 
 }
